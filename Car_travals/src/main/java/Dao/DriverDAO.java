@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import bean.RideRequestBean;
+import bean.DriverBean;
 
 public class DriverDAO {
     
@@ -111,6 +112,29 @@ public class DriverDAO {
             System.out.println("ERROR: Fetching ride history failed - " + e.getMessage());
         }
         return rideHistory;
+    }
+    public static List<DriverBean> getAllDrivers() {
+        List<DriverBean> drivers = new ArrayList<>();
+        
+        String sql = "SELECT user_id, full_name, email, phone FROM app_users WHERE user_role = 'driver'";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                DriverBean driver = new DriverBean();
+                driver.setUserId(rs.getInt("user_id"));
+                driver.setFullName(rs.getString("full_name"));
+                driver.setEmail(rs.getString("email"));
+                driver.setPhone(rs.getString("phone"));
+                drivers.add(driver);
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR: Fetching drivers failed - " + e.getMessage());
+        }
+        return drivers;
     }
     
 

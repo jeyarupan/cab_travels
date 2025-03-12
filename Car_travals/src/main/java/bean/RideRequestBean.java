@@ -13,7 +13,7 @@ public class RideRequestBean {
     private Timestamp completionTime;
     
     // Constructor
-    public RideRequestBean() {}
+    public RideRequestBean(int i, int j, String string, String string2, double d, double e, String string3, Timestamp timestamp, int k) {}
     
     public RideRequestBean(int requestId, int customerId, String pickupAddress, String dropoffAddress, double estimatedDistance, double estimatedFare, String status) {
         this.requestId = requestId;

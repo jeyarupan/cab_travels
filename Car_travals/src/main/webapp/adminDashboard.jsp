@@ -11,10 +11,10 @@
         <nav>
             <ul>
                 <li><a href="AssignRideServlet">Assign Ride to Driver</a></li>
-                <li><a href="manageCustomers.jsp">Manage Customers</a></li>
-                <li><a href="manageDrivers.jsp">Manage Drivers</a></li>
-                <li><a href="viewTotalEarnings.jsp">View Total Earnings</a></li>
-                <li><a href="viewRideHistory.jsp">View All Ride History</a></li>
+                <li><a href="ManageCustomersServlet">Manage Customers</a></li>
+                <li><a href="ManageDriversServlet">Manage Drivers</a></li>
+                <li><a href="ViewTotalEarningsServlet">View Total Earnings</a></li>
+                <li><a href="ViewAllRideHistoryServlet">View All Ride History</a></li>
                 <li><a href="LogoutServlet">Logout</a></li>
             </ul>
         </nav>
