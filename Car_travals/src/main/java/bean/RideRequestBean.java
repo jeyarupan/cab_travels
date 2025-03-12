@@ -1,29 +1,41 @@
 package bean;
 
-
+import java.sql.Timestamp;
 
 public class RideRequestBean {
     private int requestId;
     private int customerId;
-    private String pickupLocation;
-    private String dropoffLocation;
-    private double distance;
-    private double fare;
+    private String pickupAddress;
+    private String dropoffAddress;
+    private double estimatedDistance;
+    private double estimatedFare;
     private String status;
+    private Timestamp completionTime;
     
     // Constructor
     public RideRequestBean() {}
     
-    public RideRequestBean(int requestId, int customerId, String pickupLocation, String dropoffLocation, double distance, double fare, String status) {
+    public RideRequestBean(int requestId, int customerId, String pickupAddress, String dropoffAddress, double estimatedDistance, double estimatedFare, String status) {
         this.requestId = requestId;
         this.customerId = customerId;
-        this.pickupLocation = pickupLocation;
-        this.dropoffLocation = dropoffLocation;
-        this.distance = distance;
-        this.fare = fare;
+        this.pickupAddress = pickupAddress;
+        this.dropoffAddress = dropoffAddress;
+        this.estimatedDistance = estimatedDistance;
+        this.estimatedFare = estimatedFare;
         this.status = status;
     }
-
+    
+    public RideRequestBean(int requestId, int customerId, String pickupAddress, String dropoffAddress, double estimatedDistance, double estimatedFare, String status, Timestamp completionTime) {
+        this.requestId = requestId;
+        this.customerId = customerId;
+        this.pickupAddress = pickupAddress;
+        this.dropoffAddress = dropoffAddress;
+        this.estimatedDistance = estimatedDistance;
+        this.estimatedFare = estimatedFare;
+        this.status = status;
+        this.completionTime = completionTime;
+    }
+    
     // Getters and Setters
     public int getRequestId() {
         return requestId;
@@ -37,34 +49,40 @@ public class RideRequestBean {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-    public String getPickupLocation() {
-        return pickupLocation;
+    public String getPickupAddress() {
+        return pickupAddress;
     }
-    public void setPickupLocation(String pickupLocation) {
-        this.pickupLocation = pickupLocation;
+    public void setPickupAddress(String pickupAddress) {
+        this.pickupAddress = pickupAddress;
     }
-    public String getDropoffLocation() {
-        return dropoffLocation;
+    public String getDropoffAddress() {
+        return dropoffAddress;
     }
-    public void setDropoffLocation(String dropoffLocation) {
-        this.dropoffLocation = dropoffLocation;
+    public void setDropoffAddress(String dropoffAddress) {
+        this.dropoffAddress = dropoffAddress;
     }
-    public double getDistance() {
-        return distance;
+    public double getEstimatedDistance() {
+        return estimatedDistance;
     }
-    public void setDistance(double distance) {
-        this.distance = distance;
+    public void setEstimatedDistance(double estimatedDistance) {
+        this.estimatedDistance = estimatedDistance;
     }
-    public double getFare() {
-        return fare;
+    public double getEstimatedFare() {
+        return estimatedFare;
     }
-    public void setFare(double fare) {
-        this.fare = fare;
+    public void setEstimatedFare(double estimatedFare) {
+        this.estimatedFare = estimatedFare;
     }
     public String getStatus() {
         return status;
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public Timestamp getCompletionTime() {
+        return completionTime;
+    }
+    public void setCompletionTime(Timestamp completionTime) {
+        this.completionTime = completionTime;
     }
 }

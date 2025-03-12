@@ -6,6 +6,9 @@ public class DriverBean {
     private String email;
     private String phone;
     private String password;
+    private int vehicleId;
+    private String vehicleModel;
+    private String plateNumber;
     
     // Constructor
     public DriverBean() {}
@@ -47,5 +50,23 @@ public class DriverBean {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public int getVehicleId() {
+        return vehicleId;
+    }
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+    public String getVehicleModel() {
+        return vehicleModel;
+    }
+    public void setVehicleModel(String vehicleModel) {
+        this.vehicleModel = vehicleModel;
+    }
+    public String getPlateNumber() {
+        return plateNumber;
+    }
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
     }
 }

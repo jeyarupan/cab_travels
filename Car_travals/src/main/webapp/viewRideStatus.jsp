@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.List" %>
+<%@ page import="bean.RideRequestBean" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,14 +26,15 @@
                 <%-- Rides will be populated here dynamically --%>
                 <%@ page import="java.util.List" %>
                 <%@ page import="bean.RideRequestBean" %>
-                <% List<RideRequestBean> rides = (List<RideRequestBean>) request.getAttribute("rides"); %>
+                <%  List<RideRequestBean> rides = (List<RideRequestBean>) request.getAttribute("rides");  %>
+               <%  System.out.println("DEBUG: Number of rides passed to JSP: " + (rides != null ? rides.size() : "null"));%>
                 <% if (rides != null && !rides.isEmpty()) { %>
                     <% for (RideRequestBean ride : rides) { %>
                         <tr>
-                            <td><%= ride.getPickupLocation() %></td>
-                            <td><%= ride.getDropoffLocation() %></td>
-                            <td><%= ride.getDistance() %></td>
-                            <td><%= ride.getFare() %></td>
+                            <td><%= ride.getPickupAddress() %></td>
+                            <td><%= ride.getDropoffAddress() %></td>
+                            <td><%= ride.getEstimatedDistance() %></td>
+                            <td><%= ride.getEstimatedFare() %></td>
                             <td><%= ride.getStatus() %></td>
                         </tr>
                     <% } %>

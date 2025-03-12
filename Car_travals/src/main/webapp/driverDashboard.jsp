@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="jakarta.servlet.http.HttpSession" %>
+    <%
+    HttpSession sessionObj = request.getSession(false);
+    if (sessionObj == null || sessionObj.getAttribute("userId") == null) {
+        response.sendRedirect("login.jsp?msg=sessionExpired");
+        return;
+    }
+
+    // Retrieve session details
+    int driverId = (int) sessionObj.getAttribute("userId");
+    String fullName = (String) sessionObj.getAttribute("fullName");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +25,9 @@
         <nav>
             <ul>
                 <li><a href="addVehicle.jsp">Add Vehicle</a></li>
-                <li><a href="viewAssignedRides.jsp">View Assigned Rides</a></li>
-                <li><a href="viewRideHistory.jsp">View Ride History</a></li>
-                <li><a href="logout.jsp">Logout</a></li>
+                <li><a href="ViewAssignedRidesServlet">View Assigned Rides</a></li>
+                <li><a href="ViewRideHistoryServlet">View Ride History</a></li>
+                <li><a href="LogoutServlet">Logout</a></li>
             </ul>
         </nav>
         

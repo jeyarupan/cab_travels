@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+
+<%
+    HttpSession sessionObj = request.getSession(false);
+    if (sessionObj == null || sessionObj.getAttribute("userId") == null) {
+        response.sendRedirect("login.jsp?msg=sessionExpired");
+        return;
+    }
+
+    // Retrieve session details
+    int userId = (int) sessionObj.getAttribute("userId");
+    String fullName = (String) sessionObj.getAttribute("fullName");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +23,13 @@
 </head>
 <body>
     <div class="container">
-        <h2>Welcome, Customer</h2>
+        <h2>Welcome, <%= fullName %>!</h2> <!-- Show customer's name -->
         
         <nav>
             <ul>
                 <li><a href="bookRide.jsp">Book a Ride</a></li>
-                <li><a href="viewRideStatus.jsp">View Ride Status</a></li>
-                <li><a href="logout.jsp">Logout</a></li>
+                <li><a href="ViewRideStatusServlet">View Ride Status</a></li> <!-- Redirect to servlet -->
+                <li><a href="LogoutServlet">Logout</a></li>
             </ul>
         </nav>
         
@@ -24,3 +39,4 @@
     </div>
 </body>
 </html>
+

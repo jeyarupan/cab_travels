@@ -1,11 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,7 +8,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import models.RideRequest;
+import bean.RideRequestBean;
+import Dao.RideRequestDAO;
 
 @WebServlet("/ViewRideStatusServlet")
 public class ViewRideStatusServlet extends HttpServlet {
@@ -21,38 +17,31 @@ public class ViewRideStatusServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Integer customerId = (Integer) session.getAttribute("userId");
-        
-        if (customerId == null) {
+        HttpSession session = request.getSession(false); // Get existing session
+
+        if (session == null || session.getAttribute("userId") == null) {
+            System.out.println("DEBUG: No active session. Redirecting to login.");
             response.sendRedirect("login.jsp?msg=sessionExpired");
             return;
         }
-        
-        List<RideRequest> rides = new ArrayList<>();
-        
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT pickup_address, dropoff_address, estimated_distance, estimated_fare, request_status FROM ride_requests WHERE customer_id = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, customerId);
-            ResultSet rs = stmt.executeQuery();
-            
-            while (rs.next()) {
-                RideRequest ride = new RideRequest(
-                    rs.getString("pickup_address"),
-                    rs.getString("dropoff_address"),
-                    rs.getDouble("estimated_distance"),
-                    rs.getDouble("estimated_fare"),
-                    rs.getString("request_status")
-                );
-                rides.add(ride);
+
+        Integer customerId = (Integer) session.getAttribute("userId");
+        System.out.println("DEBUG: View Ride Status - customerId from session: " + customerId);
+
+        List<RideRequestBean> rides = RideRequestDAO.getCustomerRides(customerId);
+
+        // Debugging: Check if we are getting rides
+        System.out.println("DEBUG: Number of rides found = " + (rides != null ? rides.size() : "null"));
+
+        if (rides == null || rides.isEmpty()) {
+            System.out.println("DEBUG: No rides found for this customer.");
+        } else {
+            for (RideRequestBean ride : rides) {
+                System.out.println("DEBUG: Ride - " + ride.getPickupAddress() + " to " + ride.getDropoffAddress());
             }
-            
-            request.setAttribute("rides", rides);
-            request.getRequestDispatcher("viewRideStatus.jsp").forward(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendRedirect("customerDashboard.jsp?msg=error");
         }
+
+        request.setAttribute("rides", rides); // Ensure rides are set as a request attribute
+        request.getRequestDispatcher("viewRideStatus.jsp").forward(request, response);
     }
 }
