@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Book a Ride</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="Css/style.css">
 </head>
 <body>
     <div class="container">

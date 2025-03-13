@@ -129,7 +129,7 @@ public class AdminDAO {
     }
 	public static double getTotalEarnings() {
         double totalEarnings = 0.0;
-        String sql = "SELECT SUM(ride_fare) AS total FROM confirmed_rides WHERE ride_status = 'Confirmed'";
+        String sql = "SELECT SUM(ride_fare) AS total FROM confirmed_rides WHERE ride_status = 'Completed'";
         
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

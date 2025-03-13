@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<div class="container">
-    <h2>Login</h2>
+<div class="container" style="width:35% ;Margin:auto; margin-top:100px">
+    <h2 style="text-align:center">Login</h2>
     <form action="LoginServlet" method="post">
         <label>Email:</label>
         <input type="email" name="email" required>

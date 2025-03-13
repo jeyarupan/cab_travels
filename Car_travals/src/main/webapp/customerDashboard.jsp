@@ -37,6 +37,7 @@
             <p>Select an option from the menu to book a ride or check your ride status.</p>
         </div>
     </div>
+      
 </body>
 </html>
 

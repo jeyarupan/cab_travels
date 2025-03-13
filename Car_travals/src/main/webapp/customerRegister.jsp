@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="Css/style.css"> <!-- Global CSS -->
 </head>
 <body>
-    <div class="container">
-        <h2>Customer Registration</h2>
+    <div class="container" style="padding-top:100px">
+        <h2 style="text-align:center">Customer Registration</h2>
         <form action="CustomerRegisterServlet" method="post" style="width:30%;margin:auto">
             <label for="fullName">Full Name:</label>
             <input type="text" name="fullName" required>
@@ -25,5 +25,6 @@
             <button type="submit" class="btn-primary">Register</button>
         </form>
     </div>
+  
 </body>
 </html>
